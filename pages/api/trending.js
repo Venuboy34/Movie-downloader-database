@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { TMDB_API_KEY, TMDB_BASE_URL, TMDB_IMAGE_BASE_URL } from '../../lib/constants';
 import { scrapeTamilMovies, scrapeEnglishMovies, scrapeHindiMovies } from '../../lib/scraper';
+import { handleApiError } from '../../lib/error-handler';
+import { prettifyMiddleware } from '../../lib/prettify';
 
 export default async function handler(req, res) {
+  // Apply prettify middleware
+  prettifyMiddleware(req, res);
+  
   try {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -57,7 +62,6 @@ export default async function handler(req, res) {
     
     return res.status(200).json(response);
   } catch (error) {
-    console.error('Trending API error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return handleApiError(error, res, 'trending-api');
   }
 }
