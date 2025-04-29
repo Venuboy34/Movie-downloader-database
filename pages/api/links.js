@@ -1,6 +1,11 @@
 import { getMovieDownloadLinks, getMovieStreamingLinks } from '../../lib/scraper';
+import { handleApiError } from '../../lib/error-handler';
+import { prettifyMiddleware } from '../../lib/prettify';
 
 export default async function handler(req, res) {
+  // Apply prettify middleware
+  prettifyMiddleware(req, res);
+  
   try {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,7 +42,6 @@ export default async function handler(req, res) {
     
     return res.status(200).json(response);
   } catch (error) {
-    console.error('Links API error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return handleApiError(error, res, 'links-api');
   }
 }
