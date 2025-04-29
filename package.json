@@ -1,0 +1,29 @@
+{
+  "name": "movie-scraper-api",
+  "version": "1.0.0",
+  "description": "API to scrape movie links and fetch movie details from TMDB",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "movie",
+    "scraper",
+    "api",
+    "tmdb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "next": "^14.0.0",
+    "puppeteer-core": "^21.5.0",
+    "chrome-aws-lambda": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
